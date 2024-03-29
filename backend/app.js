@@ -9,8 +9,11 @@ const cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const {Message} = require("./model.js");
 
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -51,8 +54,56 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000, function () {
-  console.log('Node app is running on port 80');
+let server = app.listen(3000);
+
+let io = require('socket.io')(server,{
+  cors: {
+    origin: "*"
+  }
+});
+
+const sockets = {};
+
+io.on('connection', (socket) => {
+  socket.on('register_user', (data) => {
+    sockets[`${data.chat_id}_${data.from}`] = socket;
+    console.log('User registered', data);
+    console.log('from', data.from);
+    if(`${data.chat_id}_${data.to}` in sockets){
+      console.log('User online', data);
+      sockets[`${data.chat_id}_${data.to}`].emit('user_online', data);
+      sockets[`${data.chat_id}_${data.from}`].emit('user_online', data);
+    }
+  });
+
+  socket.on('send_message', async (data) => {
+    console.log('Message received', data);
+    const {to, from, message, chat_id, type, timestamp} = data;
+    const messageData = {
+      chat_id,
+      from,
+      to,
+      message,
+      type,
+      timestamp
+    };
+    const newMessage = new Message(messageData);
+    await newMessage.save();
+    if(`${chat_id}_${to}` in sockets){
+      sockets[`${chat_id}_${to}`].emit('new_message', messageData);
+    }
+  });
+
+  socket.on('disconnect', () => {
+    for (const key in sockets) {
+      if (Object.hasOwnProperty.call(sockets, key)) {
+        const element = sockets[key];
+        if(element === socket){
+          delete sockets[key];
+        }
+      }
+    }
+  });
 });
 
 module.exports = app;
