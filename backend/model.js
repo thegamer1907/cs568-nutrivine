@@ -55,7 +55,7 @@ const user_preference = new mongoose.Schema({
     }
   });
 
-const User_Preference = mongoose.model('user_preferences', messageSchema);
+const User_Preference = mongoose.model('user_preferences', user_preference);
 
 
 
