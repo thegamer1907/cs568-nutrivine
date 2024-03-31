@@ -1,0 +1,22 @@
+<div class="chat-container">
+    <!-- Messages container -->
+    <div class="messages">
+        <div *ngFor="let message of messages" 
+             [ngClass]="{'my-message': message.from === username, 'other-message': message.from !== username}" 
+             class="message">
+            <!-- Display message or image -->
+            <div *ngIf="message.type === 'text'" class="message-content">{{ message.message }}</div>
+            <img *ngIf="message.type === 'image'" [src]="message.message" class="message-image">
+        </div>
+    </div>
+
+    <!-- Message form -->
+    <form (ngSubmit)="sendMessage()" class="message-form">
+        <input type="text" [(ngModel)]="message" name="message" class="message-input" placeholder="Type your message...">
+        <div class="submit-buttons">
+            <button type="submit" class="send-button">Send</button>
+            <label for="imageUpload" class="image-upload-label">📷</label>
+            <input type="file" id="imageUpload" (change)="handleImageUpload($event)" hidden>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Dietary Restrictions</h2>
+  <form [formGroup]="form">
+    <div class="form-element" *ngFor="let question of questions">
+      <label class="form-label">{{question.text}}</label>
+      <mat-form-field class="form-options">
+        <mat-select [formControlName]="question.text" >
+            <mat-option *ngFor="let option of question.options" [value]="option.text">{{ option.text }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="form.controls[question.text]?.value.includes('Other') ">
+        <mat-label>Input</mat-label>
+        <input matInput [formControlName]="question.text + 'Custom'">
+      </mat-form-field>
+    </div>
+  </form>
+  <button style="width: 100%;" (click)="submitForm()">Submit</button>
+</div>

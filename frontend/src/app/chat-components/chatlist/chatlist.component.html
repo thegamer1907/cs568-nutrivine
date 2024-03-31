@@ -1,0 +1,15 @@
+<div class="chat-container">
+    <div class="greeting-container">
+        <h2>Hi <span class="user-name">{{username}}!</span> Here are your chats</h2>
+    </div>
+    <div *ngIf="chats.length > 0; else noChats" class="chat-list">
+        <div class="chat-item" *ngFor="let chat of chats" (click)="openChat(chat)">
+            <span class="chat-user">{{chat.user}}</span>
+            <span class="chat-id">{{chat._id}}</span>
+        </div>
+    </div>
+    <ng-template #noChats>
+        <div class="no-chats">No chats</div>
+    </ng-template>
+    <button class="new-chat-btn" (click)="newChat()">New Chat</button>
+</div>

@@ -1,0 +1,102 @@
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    overflow: hidden; /* Prevents overflow */
+  }
+  
+  .messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+  
+  .message {
+    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+  }
+  
+  .message-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .message-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 2px solid #4CAF50;
+    border-radius: 20px;
+    outline: none;
+  }
+
+  .submit-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .send-button {
+    width: 50%;
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 0;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .send-button:hover {
+    background-color: #43a047;
+  }
+  
+  .my-message {
+    justify-content: flex-end;
+    /* background-color: #4CAF50;  */
+  }
+  
+  .other-message {
+    justify-content: flex-start;
+    /* background-color: #ffffff; */
+  }
+  
+  .message-content {
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 20px;
+    color: #fff;
+  }
+  
+  .my-message .message-content {
+    background-color: #4CAF50; /* Green background for consistency */
+    color: #ffffff; /* Ensure text color contrasts with background */
+  }
+  
+  .other-message .message-content {
+    background-color: #ffffff; /* White background for contrast */
+    color: #333; /* Darker text for readability */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .message-image {
+    max-width: 100%;
+    max-height: 200px; /* Limits image size */
+    object-fit: cover; /* Keeps aspect ratio */
+    border-radius: 8px;
+}
+
+.image-upload-label {
+    color: white; /* White text color */
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #4CAF50;
+    cursor: pointer; /* Cursor indicates clickable area */
+    margin-right: 10px; /* Spacing between upload label and send button */
+}
