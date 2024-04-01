@@ -67,17 +67,13 @@ const sockets = {};
 io.on('connection', (socket) => {
   socket.on('register_user', (data) => {
     sockets[`${data.chat_id}_${data.from}`] = socket;
-    console.log('User registered', data);
-    console.log('from', data.from);
     if(`${data.chat_id}_${data.to}` in sockets){
-      console.log('User online', data);
       sockets[`${data.chat_id}_${data.to}`].emit('user_online', data);
       sockets[`${data.chat_id}_${data.from}`].emit('user_online', data);
     }
   });
 
   socket.on('send_message', async (data) => {
-    console.log('Message received', data);
     const {to, from, message, chat_id, type, timestamp} = data;
     const messageData = {
       chat_id,
