@@ -1,6 +1,20 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <div class="chat-container">
+    <!-- Toggle Button for Preferences -->
+    <button class="preferences-toggle" (click)="togglePreferences()">Preferences</button>
+    
+    <!-- Preferences Panel -->
+    <div class="preferences-panel" [ngClass]="{'show': showPreferences}">
+        <div *ngFor="let preference of userPreferences">
+            <div class="preference-item">
+                <span class="preference-question">{{preference.question}}:</span>
+                <span class="preference-answer">{{preference.answer}}</span>
+            </div>
+        </div>
+    </div>
     <!-- Messages container -->
-    <div class="messages">
+    <div class="messages" #messagesContainer>
         <div *ngFor="let message of messages" 
              [ngClass]="{'my-message': message.from === username, 'other-message': message.from !== username}" 
              class="message">
@@ -16,7 +30,11 @@
         <div class="submit-buttons">
             <button type="submit" class="send-button">Send</button>
             <label for="imageUpload" class="image-upload-label">📷</label>
-            <input type="file" id="imageUpload" (change)="handleImageUpload($event)" hidden>
+            <input type="file" 
+                id="imageUpload" 
+                accept="image/*" 
+                capture = "camera"
+                hidden>
         </div>
     </form>
 </div>

@@ -1,0 +1,13 @@
+.container {
+    height: 100%;
+    padding: 20px 20px;
+}
+
+button {
+    background-color: #4CAF50;
+}
+
+h2 {
+    color: #4CAF50;
+    font-weight: bold;
+}

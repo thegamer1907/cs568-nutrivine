@@ -1,4 +1,7 @@
 /* dietary-form.component.css */
+.container {
+  height: 100%;
+}
 
 button {
   width: calc(100% - 20px); /* Adjust width to account for padding */

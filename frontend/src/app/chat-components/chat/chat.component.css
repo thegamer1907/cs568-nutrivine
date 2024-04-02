@@ -1,7 +1,7 @@
 .chat-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     padding: 20px;
     box-sizing: border-box;
     background-color: #f9f9f9;
@@ -12,6 +12,7 @@
     flex-grow: 1;
     overflow-y: auto;
     margin-bottom: 20px;
+    scroll-behavior: smooth; /* Enables smooth scrolling */
   }
   
   .message {
@@ -99,4 +100,41 @@
     border: 2px solid #4CAF50;
     cursor: pointer; /* Cursor indicates clickable area */
     margin-right: 10px; /* Spacing between upload label and send button */
+}
+
+.preferences-toggle {
+  display: block; /* Ensure it's easily tappable */
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px; /* Space from chat */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.preferences-panel {
+  display: none; /* Hidden by default */
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.preferences-panel.show {
+  display: block; /* Show panel */
+}
+
+.preference-item {
+  padding: 5px;
+  border-bottom: 1px solid #ddd; /* Separator */
+}
+
+.preference-question {
+  font-weight: bold;
+}
+
+.preference-answer {
+  margin-left: 5px;
 }
