@@ -47,7 +47,10 @@ router.get('/chats/:user', async function(req, res, next) {
 router.get('/messages/:chat_id', async function(req, res, next) {
   const {chat_id} = req.params;
   const messages = await Message.find({chat_id});
-  res.send(messages)
+  const chat = await Chat.findById(chat_id);
+  const preferences = await User_Preference.find({user: chat.user});
+  console.log(preferences)
+  res.send({messages : messages, preferences: preferences[0].preferences})
 });
 
 module.exports = router;
